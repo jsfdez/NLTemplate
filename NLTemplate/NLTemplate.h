@@ -138,6 +138,15 @@ public:
     Result load( const std::string & name );
 };
 
+    
+class LoaderMemory : public Loader {
+private:
+    std::vector<std::pair<std::string, std::string>> files;
+public:
+    void add( const std::string & name, const std::string & body );
+    Result load( const std::string & name );
+};
+
 
 
 class Template : public Block {
