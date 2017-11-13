@@ -1,3 +1,4 @@
+#include <sstream>
 #include <iostream>
 #include "NLTemplate.h"
 
@@ -35,7 +36,11 @@ static void testFile() {
         }
     }
     
-    t.render( cout ); // Render the template with the variables we've set above
+    stringbuf buf;
+    ostream sout( &buf );
+    t.render( sout ); // Render the template with the variables we've set above
+    
+    cout << buf.str();
 }
 
 
