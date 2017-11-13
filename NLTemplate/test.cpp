@@ -3,18 +3,14 @@
 #include "NLTemplate.h"
 
 
-using namespace std;
-using namespace NL::Template;
-
-
 
 static void testFile() {
     const char *titles[ 3 ] = { "Chico", "Harpo", "Groucho" };
     const char *details[ 3 ] = { "Red", "Green", "Blue" };
     
-    LoaderFile loader; // Let's use the default loader that loads files from disk.
+    NL::Template::LoaderFile loader; // Let's use the default loader that loads files from disk.
     
-    Template t( loader );
+    NL::Template::Template t( loader );
     
     t.load( "Templates/test.txt" );               // Load & parse the main template and its dependencies.
     t.set( "text", "Hello, world" );    // Set a top-level variable
@@ -27,7 +23,7 @@ static void testFile() {
         t.block( "items" )[ i ].set( "text", "Lorem Ipsum" );
         
         // We can get a shortcut reference to a nested block
-        Block & block = t.block( "items" )[ i ].block( "detailblock" );
+        NL::Template::Block & block = t.block( "items" )[ i ].block( "detailblock" );
         block.set( "detail", details[ i ] );
         
         // Disable this block for the first item in the list. Can be useful for opening/closing HTML tables etc.
@@ -36,18 +32,18 @@ static void testFile() {
         }
     }
     
-    stringbuf buf;
-    ostream sout( &buf );
+    std::stringbuf buf;
+    std::ostream sout( &buf );
     t.render( sout ); // Render the template with the variables we've set above
     
-    cout << buf.str();
+    std::cout << buf.str();
 }
 
 
 static void testMemory() {
-    LoaderMemory loader;
+    NL::Template::LoaderMemory loader;
     
-    Template t( loader );
+    NL::Template::Template t( loader );
     
     loader.add( "base", "<html><head>{{ title }}</head>\n<body><p>{% include text %}</p></body></html>\n" );
     loader.add( "text", "Hi there, {{ name }}. How are you??" );
@@ -56,7 +52,7 @@ static void testMemory() {
     t.set( "title", "Testing memory loader" );
     t.set( "name", "Stranger" );
     
-    t.render( cout );
+    t.render( std::cout );
 }
 
 
