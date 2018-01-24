@@ -27,8 +27,8 @@ If you use Xcode, just open and run the demo project. On the command line, you c
 
 ``` bash
 git clone git@github.com:catnapgames/NLTemplate.git
-cd NLTemplate/NLTemplate
-gcc -Wall -pedantic -o demo -lstdc++ *.cpp
+cd NLTemplate
+gcc -Wall -pedantic -o demo -std=c++11 -lc++ NLTemplate/*.cpp
 ./demo
 ```
 
