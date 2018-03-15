@@ -252,13 +252,25 @@ void Node::render( std::ostream & output, const Dictionary & ) const {
 
 
 
+#ifdef __EXCEPTIONS
 Block & Node::block( const std::string & name ) const {
+#else
+Block * Node::block( const std::string & name ) const {
+#endif
     for ( auto & fragment : fragments ) {
         if ( fragment->isBlockNamed( name ) ) {
+#ifdef __EXCEPTIONS
             return *dynamic_cast<Block*>( fragment );
+#else
+            return dynamic_cast<Block*>( fragment );
+#endif
         }
     }
+#ifdef __EXCEPTIONS
     throw "Block not found";
+#else
+    return nullptr;
+#endif
 }
 
 

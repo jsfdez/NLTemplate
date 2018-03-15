@@ -91,7 +91,11 @@ public:
     ~Node();
     Fragment *copy() const;
     void render( std::ostream & output, const Private::Dictionary & dictionary ) const;
+#ifdef __EXCEPTIONS
     Block & block( const std::string & name ) const;
+#else
+    Block * block( const std::string & name ) const;
+#endif
 
 protected:
     std::vector<Fragment*> fragments;
